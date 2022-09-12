@@ -5,6 +5,7 @@ public class BulbasaurThing extends PokeThing {
 	 * Creates a new <code>BulbasaurThing</code> object.
 	 * Associated graphics file will be bulbasaur.gif
 	 */
+	
 	public BulbasaurThing()
 	{
 		super("Bulbasaur", "", 0);	
@@ -28,8 +29,10 @@ public class BulbasaurThing extends PokeThing {
 	 */	
 	public void step()
 	{
-		putFlower();
-		move();
+		//moves the bulbasaur
+		movementPattern(); 
+		
+		
 	}
 	
 	/**
@@ -39,5 +42,20 @@ public class BulbasaurThing extends PokeThing {
 	{
 		Gui g = getBoard().getGui();
 		g.appendTextWindow("Bulbasaur has been tickled.");
+	}
+	
+	public void movementPattern()
+	{		
+		Location nextLoc = getDirection().getNextLocation(getLocation()); 
+		boolean stuck = !(nextLoc.isValid(getBoard()));
+		
+		if (stuck) 
+		{
+			setDirection(getDirection().right());
+		}
+		
+		putFlower();
+		
+		move();
 	}
 }
